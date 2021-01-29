@@ -10,8 +10,9 @@ public class KnifeController : MonoBehaviour
     
     [SerializeField] private float speed = 1;
     
-    private bool _isMovingUp = true;
+    private bool _isMovingUp = false;
     private bool _isAttachedToLog = false;
+    private bool _hasCollidedWithOtherKnife = false;
 
     private void FixedUpdate()
     {
@@ -50,9 +51,19 @@ public class KnifeController : MonoBehaviour
 
     private void OnKnifeCollision(GameObject otherKnife)
     {
+        if (_hasCollidedWithOtherKnife)
+        {
+            return;
+        }
         _isMovingUp = false;
+        _hasCollidedWithOtherKnife = true;
         Rigidbody2D rigidbody = gameObject.AddComponent<Rigidbody2D>();
         rigidbody.velocity = Vector2.down * speed;
         KnifeCollidedWithKnife?.Invoke();
+    }
+
+    public void Throw()
+    {
+        _isMovingUp = true;
     }
 }
