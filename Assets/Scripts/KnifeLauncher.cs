@@ -5,50 +5,67 @@ using UnityEngine;
 
 public class KnifeLauncher : MonoBehaviour
 {
+    public bool StopKnifeSpawning = false;
+    
+    [SerializeField] private InputManager inputManager;
     [SerializeField] private GameObject knifePrefab;
     
     private GameObject _currentKnife;
     private KnifeController _currentKnifeController;
-    private bool _isReadyToThrow = false;
+    private bool _currentKnifeExists = false;
 
+    
+    
     private void OnEnable()
     {
-        SpawnKnife();
         KnifeController.KnifeCollidedWithLog += SpawnKnife;
-        InputManager.Instance.Tap += ThrowKnife;
+        inputManager.Tap += ThrowKnife;
+        SpawnKnife();
     }
 
     private void OnDisable()
     {
-        DestroyCurrentKnife();
         KnifeController.KnifeCollidedWithLog -= SpawnKnife;
-        InputManager.Instance.Tap -= ThrowKnife;
+        inputManager.Tap -= ThrowKnife;
     }
 
+    public void OnLevelStart()
+    {
+        SpawnKnife();
+    }
+    
     private void SpawnKnife()
     {
+        if (StopKnifeSpawning)
+        {
+            return;
+        }
         _currentKnife = Instantiate(knifePrefab, transform.position, transform.rotation);
         _currentKnifeController = _currentKnife.GetComponent<KnifeController>();
-        _isReadyToThrow = true;
+        _currentKnifeExists = true;
     }
 
-    private void DestroyCurrentKnife()
+    public void DestroyCurrentKnife()
     {
+        if (!_currentKnifeExists)
+        {
+            return;
+        }
         Destroy(_currentKnife);
         _currentKnife = null;
         _currentKnifeController = null;
-        _isReadyToThrow = false;
+        _currentKnifeExists = false;
     }
     
     private void ThrowKnife()
     {
-        if (!_isReadyToThrow)
+        if (!_currentKnifeExists)
         {
             return;
         }
         _currentKnifeController.Throw();
         _currentKnife = null;
         _currentKnifeController = null;
-        _isReadyToThrow = false;
+        _currentKnifeExists = false;
     }
 }

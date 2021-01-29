@@ -5,22 +5,8 @@ using UnityEngine;
 
 public class InputManager : MonoBehaviour
 {
-    public static InputManager Instance;
-    
     public event Action Tap;
-
-    private void Awake()
-    {
-        if (Instance == null)
-        {
-            Instance = this;
-        }
-        else
-        {
-            Debug.LogError("Created multiple input managers");
-        }
-    }
-
+    
     private void Update()
     {
         bool tap = false;

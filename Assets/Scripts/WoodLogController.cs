@@ -42,6 +42,7 @@ public class WoodLogController : MonoBehaviour
             if (_testDestroy)
             {
                 Destroy();
+                _testDestroy = false;
             }
         }
     }
