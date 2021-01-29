@@ -3,7 +3,9 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Wood Log
+  - Knife
   layers:
   - Default
   - TransparentFX
@@ -38,6 +40,15 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: Background
+    uniqueID: 3676545975
+    locked: 0
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Knife
+    uniqueID: 2676967317
+    locked: 0
+  - name: Wood Log
+    uniqueID: 3740005591
     locked: 0

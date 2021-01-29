@@ -7,7 +7,10 @@ using UnityEngine.Serialization;
 
 public class WoodLogController : MonoBehaviour
 {
-    [SerializeField] private float rotationSpeed;
+    [SerializeField] private float rotationSpeed = 100;
+
+    [Header("Test")]
+    [SerializeField] private bool _testDestroy;
 
     private GameObject[] _segments;
     private WoodLogSegmentController[] _segmentControllers;
@@ -36,6 +39,10 @@ public class WoodLogController : MonoBehaviour
         if (!_isDestroyed)
         {
             transform.Rotate(new Vector3(0, 0, rotationSpeed * Time.fixedDeltaTime));
+            if (_testDestroy)
+            {
+                Destroy();
+            }
         }
     }
 

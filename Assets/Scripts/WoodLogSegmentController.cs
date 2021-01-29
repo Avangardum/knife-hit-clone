@@ -9,9 +9,14 @@ public class WoodLogSegmentController : MonoBehaviour
     
     public void OnLogDestroy()
     {
-        var rigidbody = gameObject.AddComponent<Rigidbody2D>();
+        var rigidbody = gameObject.GetComponent<Rigidbody2D>();
+        rigidbody.simulated = true;
+        rigidbody.gravityScale = 1;
         Vector2 forceDirection = -transform.right;
         Vector2 force = forceDirection.normalized * forceOnDestroy;
         rigidbody.AddForce(force, ForceMode2D.Impulse);
+
+        var collider = gameObject.GetComponent<PolygonCollider2D>();
+        collider.isTrigger = false;
     }
 }
