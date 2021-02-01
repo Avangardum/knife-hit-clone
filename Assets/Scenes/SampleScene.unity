@@ -294,7 +294,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f51466b89c8f5b649b0461a5b599b275, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  knifePrefab: {fileID: 4990966718812596471, guid: 29319d2682a1c1e4389a48b203139e1d, type: 3}
+  leftHalf: {fileID: 1365201175}
+  rightHalf: {fileID: 677079251}
   rotationSpeed: 100
+  initialKnivesAmount: 3
+  initialKnivesMinAngleDifferenceDeg: 10
   _testDestroy: 0
 --- !u!1 &677079251
 GameObject:

@@ -66,4 +66,9 @@ public class KnifeController : MonoBehaviour
     {
         _isMovingUp = true;
     }
+
+    public void InitialiseAsInitialKnife()
+    {
+        _isAttachedToLog = true;
+    }
 }
