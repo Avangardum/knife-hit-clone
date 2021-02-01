@@ -74,6 +74,7 @@ public class GameManager : MonoBehaviour
     
     private void GameOver()
     {
+        LevelsPassed = 0;
         gameOverUI.SetActive(true);
     }
 }
