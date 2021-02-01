@@ -56,7 +56,7 @@ public class WoodLogController : MonoBehaviour
         }
     }
 
-    private void Destroy()
+    public void Destroy()
     {
         _isDestroyed = true;
         foreach (WoodLogSegmentController segmentController in _segmentControllers)

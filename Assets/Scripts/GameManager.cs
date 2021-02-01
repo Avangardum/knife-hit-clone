@@ -13,6 +13,7 @@ public class GameManager : MonoBehaviour
     public int SuccessfulHitsLeft { get; private set; }
 
     [SerializeField] private KnifeLauncher knifeLauncher;
+    [SerializeField] private WoodLogController woodLogController;
     [SerializeField] private int knivesAtLevel1 = 1;
     [SerializeField] private int addKnivesPerLevel = 1;
     [SerializeField] private float delayBeforeNextLevel = 1f;
@@ -35,6 +36,7 @@ public class GameManager : MonoBehaviour
         {
             knifeLauncher.DestroyCurrentKnife();
             knifeLauncher.StopKnifeSpawning = true;
+            woodLogController.Destroy();
             Invoke(nameof(NextLevel), delayBeforeNextLevel);
         }
     }

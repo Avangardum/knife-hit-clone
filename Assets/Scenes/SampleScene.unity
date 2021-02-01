@@ -630,9 +630,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knifeLauncher: {fileID: 1774231306}
+  woodLogController: {fileID: 570465469}
   knivesAtLevel1: 5
   addKnivesPerLevel: 1
-  delayBeforeNextLevel: 0.5
+  delayBeforeNextLevel: 1.5
 --- !u!4 &937642220
 Transform:
   m_ObjectHideFlags: 0
