@@ -10,11 +10,13 @@ using Vector2 = System.Numerics.Vector2;
 public class WoodLogController : MonoBehaviour
 {
     [SerializeField] private GameObject knifePrefab;
+    [SerializeField] private GameObject applePrefab;
     [SerializeField] private GameObject leftHalf;
     [SerializeField] private GameObject rightHalf;
     [SerializeField] private float rotationSpeed = 100;
     [SerializeField] private int initialKnivesAmount = 3;
     [SerializeField] private float initialKnivesMinAngleDifferenceDeg = 10;
+    [SerializeField] private AppleData appleData;
 
     [Header("Test")]
     [SerializeField] private bool _testDestroy;
@@ -40,7 +42,11 @@ public class WoodLogController : MonoBehaviour
             Select(x => x.gameObject).
             ToArray();
         
-        CreateInitialKnives();
+        float[] initialKnifesAngles = CreateInitialKnives();
+        if (Random.value <= appleData.SpawnChance)
+        {
+            CreateApple(initialKnifesAngles);
+        }
     }
 
     private void FixedUpdate()
@@ -65,10 +71,10 @@ public class WoodLogController : MonoBehaviour
         }
     }
     
-    private void CreateInitialKnives()
+    private float[] CreateInitialKnives()
     {
         float minAngleDifferenceRad = initialKnivesMinAngleDifferenceDeg * Mathf.Deg2Rad;
-        float[] initialKnifeAngles = new float[initialKnivesAmount];
+        float[] initialKnivesAngles = new float[initialKnivesAmount];
         for (int i = 0; i < initialKnivesAmount; i++)
         {
             float angle;
@@ -80,17 +86,17 @@ public class WoodLogController : MonoBehaviour
                 isValid = true;
                 for (int j = 0; j < i; j++)
                 {
-                    if (Mathf.Abs(angle - initialKnifeAngles[j]) < minAngleDifferenceRad)
+                    if (Mathf.Abs(angle - initialKnivesAngles[j]) < minAngleDifferenceRad)
                     {
                         isValid = false;
                         break;
                     }
                 }
             } while (!isValid);
-            initialKnifeAngles[i] = angle;
+            initialKnivesAngles[i] = angle;
         }
 
-        foreach (float knifeAngle in initialKnifeAngles)
+        foreach (float knifeAngle in initialKnivesAngles)
         {
             Transform knifeParentSegment;
             if (knifeAngle > Mathf.PI / 2 && knifeAngle < Mathf.PI * 1.5f)
@@ -110,6 +116,44 @@ public class WoodLogController : MonoBehaviour
             KnifeController knifeController = knife.GetComponent<KnifeController>();
             knifeController.InitialiseAsInitialKnife();
         }
+
+        return initialKnivesAngles;
+    }
+    
+    private void CreateApple(float[] initialKnivesAngles)
+    {
+        float minAngleDifferenceRad = appleData.MinimalAngleDifferenceWithInitialKnifeDeg * Mathf.Deg2Rad;
+        float angle;
+        bool isValid;
+        do
+        {
+            angle = UnityEngine.Random.Range(0, 2 * Mathf.PI);
+            //check if any existing angle is too close
+            isValid = true;
+            for (int i = 0; i < initialKnivesAngles.Length; i++)
+            {
+                if (Mathf.Abs(angle - initialKnivesAngles[i]) < minAngleDifferenceRad)
+                {
+                    isValid = false;
+                    break;
+                }
+            }
+        } while (!isValid);
+
+        GameObject apple = Instantiate(applePrefab);
+        apple.transform.position = new Vector3(Mathf.Cos(angle), Mathf.Sin(angle), 0) * appleData.DistanceFromLogCenter;
+        LookAt2D(apple.transform, transform, 90);
+        Transform appleParentSegment;
+        if (angle > Mathf.PI / 2 && angle < Mathf.PI * 1.5f)
+        {
+            appleParentSegment = leftHalf.transform;
+        }
+        else
+        {
+            appleParentSegment = rightHalf.transform;
+        }
+
+        apple.transform.parent = appleParentSegment;
     }
     
     private void LookAt2D(Transform lookingObject, Transform target, float rotationOffset = 0f)

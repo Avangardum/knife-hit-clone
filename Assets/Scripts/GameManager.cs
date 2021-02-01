@@ -17,7 +17,7 @@ public class GameManager : MonoBehaviour
     [SerializeField] private int knivesAtLevel1 = 1;
     [SerializeField] private int addKnivesPerLevel = 1;
     [SerializeField] private float delayBeforeNextLevel = 1f;
-    
+
     private void OnEnable()
     {
         SuccessfulHitsLeft = knivesAtLevel1 + LevelsPassed * addKnivesPerLevel;

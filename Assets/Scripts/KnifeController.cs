@@ -35,6 +35,10 @@ public class KnifeController : MonoBehaviour
         {
             OnKnifeCollision(other.gameObject);
         }
+        else if (other.CompareTag("Apple"))
+        {
+            OnAppleCollision(other.gameObject);
+        }
         else
         {
             Debug.LogError("A knife collided with an unknown object");
@@ -60,6 +64,12 @@ public class KnifeController : MonoBehaviour
         Rigidbody2D rigidbody = gameObject.AddComponent<Rigidbody2D>();
         rigidbody.velocity = Vector2.down * speed;
         KnifeCollidedWithKnife?.Invoke();
+    }
+
+    private void OnAppleCollision(GameObject apple)
+    {
+        AppleController appleController = apple.GetComponent<AppleController>();
+        appleController.OnKnifeHit();
     }
 
     public void Throw()

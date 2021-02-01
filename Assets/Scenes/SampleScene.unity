@@ -295,11 +295,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   knifePrefab: {fileID: 4990966718812596471, guid: 29319d2682a1c1e4389a48b203139e1d, type: 3}
+  applePrefab: {fileID: 5354484126808670078, guid: 3a916d56e0f2ae046b51582ca9c1f0f5, type: 3}
   leftHalf: {fileID: 1365201175}
   rightHalf: {fileID: 677079251}
   rotationSpeed: 100
   initialKnivesAmount: 3
   initialKnivesMinAngleDifferenceDeg: 10
+  appleData: {fileID: 11400000, guid: d7e9a6f9c9314b144bde2e5b2e393eeb, type: 2}
   _testDestroy: 0
 --- !u!1 &677079251
 GameObject:
@@ -373,7 +375,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -554961705
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2369c1778cc01454eaa1d6bb0ef68a7b, type: 3}
   m_Color: {r: 0.7176471, g: 0.43529412, b: 0.1254902, a: 1}
@@ -720,7 +722,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -554961705
-  m_SortingLayer: 2
+  m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 2369c1778cc01454eaa1d6bb0ef68a7b, type: 3}
   m_Color: {r: 0.7176471, g: 0.43529412, b: 0.1254902, a: 1}

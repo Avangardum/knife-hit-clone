@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Wood Log
   - Knife
+  - Apple
   layers:
   - Default
   - TransparentFX
@@ -48,6 +49,9 @@ TagManager:
     locked: 0
   - name: Knife
     uniqueID: 2676967317
+    locked: 0
+  - name: Apple
+    uniqueID: 3470921693
     locked: 0
   - name: Wood Log
     uniqueID: 3740005591
